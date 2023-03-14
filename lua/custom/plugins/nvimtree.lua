@@ -29,14 +29,4 @@ require("nvim-tree").setup({
 	},
 })
 
-
---- NvimTree
-require("nvim-tree").setup({
-	actions = {
-		open_file = {
-			quit_on_open = true,
-		},
-	},
-})
-vim.keymap("n", "<leader>vv", ":NvimTreeToggle<CR>")
-vim.keymap("n", "<leader>tf", ":NvimTreeFindFile<CR>")
+vim.keymap.set("n", "<leader>vv", ":NvimTreeToggle<CR>")
