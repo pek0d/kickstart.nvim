@@ -3,6 +3,10 @@
 --
 -- See the kickstart.nvim README for more information
 
+--Settings for nvim-tree disable netrw at the very start of your init.lua (strongly advised)
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- Autoformat after save file
 vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
 
@@ -19,12 +23,13 @@ function runLazyGit()
   run:toggle()
 end
 
+-- custom keymaps
+vim.keymap.set("n", "<leader>s", ":write<CR>")
+vim.keymap.set("n", "<leader>vv", ":NvimTreeToggle<CR>")
 vim.keymap.set("n", "<leader>gl", "<cmd>lua runLazyGit()<CR>")
 
 
-
--- install custom plugins for Pek0d
--- insert for lazy
+-- install custom plugins with setups for Pek0d
 return {
   -- nvim-tree
   {
@@ -34,9 +39,32 @@ return {
       'nvim-tree/nvim-web-devicons',
     },
     config = function()
-      require('nvim-tree').setup {}
-    end,
+      require("nvim-tree").setup({
+        actions = {
+          open_file = {
+            quit_on_open = true,
+          },
+        },
+        view = {
+          float = {
+            enable = true,
+            open_win_config = {
+              relative = "editor",
+              border = "rounded",
+              width = 90,
+              height = 90,
+              row = 80,
+              col = 80,
+            },
+          },
+        },
+        filters = {
+          dotfiles = false,
+        },
+      })
+    end
   },
+
   -- colorscheme tokyonight
   {
     'folke/tokyonight.nvim',
@@ -63,4 +91,5 @@ return {
 
   -- autopairs
   { 'windwp/nvim-autopairs' },
+
 }
