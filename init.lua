@@ -98,7 +98,7 @@ require('lazy').setup({
       },
 
       -- Additional lua configuration, makes nvim stuff amazing!
-      'folke/neodev.nvim',
+      { 'folke/neodev.nvim' },
     },
   },
 
@@ -426,7 +426,7 @@ end
 local servers = {
   -- clangd = {},
   -- gopls = {},
-  pyright = {},
+  -- pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
 
@@ -436,6 +436,26 @@ local servers = {
       telemetry = { enable = false },
     },
   },
+}
+
+-- Configure `ruff-lsp`.
+local configs = require 'lspconfig.configs'
+if not configs.ruff_lsp then
+  configs.ruff_lsp = {
+    default_config = {
+      cmd = { 'ruff-lsp' },
+      filetypes = { 'python' },
+      root_dir = require('lspconfig').util.find_git_ancestor,
+      init_options = {
+        settings = {
+          args = {}
+        }
+      }
+    }
+  }
+end
+require('lspconfig').ruff_lsp.setup {
+  on_attach = on_attach,
 }
 
 -- Setup neovim lua configuration

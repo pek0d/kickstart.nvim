@@ -8,26 +8,25 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 -- Autoformat after save file
-vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
+vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format({ async = false })]]
 
 -- Lazygit run
 function runLazyGit()
   local Terminal = require('toggleterm.terminal').Terminal
-  local run = Terminal:new({
-    cmd = "lazygit",
+  local run = Terminal:new {
+    cmd = 'lazygit',
     hidden = true,
-    direction = "float",
+    direction = 'float',
     close_on_exit = true,
-  })
+  }
 
   run:toggle()
 end
 
 -- Custom keymaps
-vim.keymap.set("n", "<C-s>", ":write<CR>")
-vim.keymap.set("n", "<leader>vv", ":NvimTreeToggle<CR>")
-vim.keymap.set("n", "<leader>gl", "<cmd>lua runLazyGit()<CR>")
-
+vim.keymap.set('n', '<C-s>', ':write<CR>')
+vim.keymap.set('n', '<leader>vv', ':NvimTreeToggle<CR>')
+vim.keymap.set('n', '<leader>gl', '<cmd>lua runLazyGit()<CR>')
 
 -- Install custom plugins with setups for Pek0d
 return {
@@ -39,7 +38,7 @@ return {
       'nvim-tree/nvim-web-devicons',
     },
     config = function()
-      require("nvim-tree").setup({
+      require('nvim-tree').setup {
         actions = {
           open_file = {
             quit_on_open = true,
@@ -49,8 +48,8 @@ return {
           float = {
             enable = true,
             open_win_config = {
-              relative = "editor",
-              border = "rounded",
+              relative = 'editor',
+              border = 'rounded',
               width = 90,
               height = 90,
               row = 80,
@@ -65,8 +64,8 @@ return {
           enable = true,
           show_on_dirs = false,
         },
-      })
-    end
+      }
+    end,
   },
 
   -- colorscheme tokyonight
@@ -75,32 +74,46 @@ return {
     lazy = false,    -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
-      require("tokyonight").setup({
-        style = "storm", -- storm, moon, day, night
+      require('tokyonight').setup {
+        style = 'storm', -- storm, moon, day, night
         transparent = false,
-      })
+      }
       -- load the colorscheme here
       vim.cmd [[colorscheme tokyonight]]
     end,
   },
 
   -- toggleterm
-  { 'akinsho/toggleterm.nvim', version = "*", config = true },
+  { 'akinsho/toggleterm.nvim', version = '*', config = true },
 
   -- Gitsigns near linenumber
   {
     'lewis6991/gitsigns.nvim',
     config = function()
       require('gitsigns').setup {}
-    end
+    end,
   },
 
   -- Autopairs
   {
     'windwp/nvim-autopairs',
     config = function()
-      require("nvim-autopairs").setup {}
-    end
+      require('nvim-autopairs').setup {}
+    end,
   },
 
+  -- null-ls custom formatting
+  {
+    'jose-elias-alvarez/null-ls.nvim',
+    config = function()
+      local null_ls = require 'null-ls'
+      null_ls.setup {
+        sources = {
+          -- null_ls.builtins.formatting.stylua,
+          null_ls.builtins.formatting.prettier,
+          null_ls.builtins.formatting.autopep8,
+        },
+      }
+    end,
+  },
 }
