@@ -3,14 +3,14 @@
 --
 -- See the kickstart.nvim README for more information
 
---Settings for nvim-tree disable netrw at the very start of your init.lua (strongly advised)
+-- Settings for nvim-tree disable netrw at the very start of your init.lua (strongly advised)
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 -- Autoformat after save file
 vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
 
--- lazygit run
+-- Lazygit run
 function runLazyGit()
   local Terminal = require('toggleterm.terminal').Terminal
   local run = Terminal:new({
@@ -23,13 +23,13 @@ function runLazyGit()
   run:toggle()
 end
 
--- custom keymaps
-vim.keymap.set("n", "<leader>s", ":write<CR>")
+-- Custom keymaps
+vim.keymap.set("n", "<C-s>", ":write<CR>")
 vim.keymap.set("n", "<leader>vv", ":NvimTreeToggle<CR>")
 vim.keymap.set("n", "<leader>gl", "<cmd>lua runLazyGit()<CR>")
 
 
--- install custom plugins with setups for Pek0d
+-- Install custom plugins with setups for Pek0d
 return {
   -- nvim-tree
   {
@@ -61,6 +61,10 @@ return {
         filters = {
           dotfiles = false,
         },
+        diagnostics = {
+          enable = true,
+          show_on_dirs = false,
+        },
       })
     end
   },
@@ -71,6 +75,10 @@ return {
     lazy = false,    -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
+      require("tokyonight").setup({
+        style = "storm", -- storm, moon, day, night
+        transparent = false,
+      })
       -- load the colorscheme here
       vim.cmd [[colorscheme tokyonight]]
     end,
@@ -86,10 +94,13 @@ return {
       require('gitsigns').setup {}
     end
   },
-  -- paste up-down
-  { 'tpope/vim-surround', },
 
   -- autopairs
-  { 'windwp/nvim-autopairs' },
+  {
+    'windwp/nvim-autopairs',
+    config = function()
+      require("nvim-autopairs").setup {}
+    end
+  },
 
 }
