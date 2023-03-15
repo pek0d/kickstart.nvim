@@ -247,6 +247,9 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
+-- vsplitright as default
+vim.o.splitright = true
+
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
@@ -426,7 +429,7 @@ end
 local servers = {
   -- clangd = {},
   -- gopls = {},
-  -- pyright = {},
+  pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
 
@@ -436,26 +439,6 @@ local servers = {
       telemetry = { enable = false },
     },
   },
-}
-
--- Configure `ruff-lsp`.
-local configs = require 'lspconfig.configs'
-if not configs.ruff_lsp then
-  configs.ruff_lsp = {
-    default_config = {
-      cmd = { 'ruff-lsp' },
-      filetypes = { 'python' },
-      root_dir = require('lspconfig').util.find_git_ancestor,
-      init_options = {
-        settings = {
-          args = {}
-        }
-      }
-    }
-  }
-end
-require('lspconfig').ruff_lsp.setup {
-  on_attach = on_attach,
 }
 
 -- Setup neovim lua configuration
