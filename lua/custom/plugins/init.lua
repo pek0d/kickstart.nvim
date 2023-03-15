@@ -61,7 +61,7 @@ return {
           dotfiles = false,
         },
         diagnostics = {
-          enable = true,
+          enable = false,
           show_on_dirs = false,
         },
       }
