@@ -86,17 +86,17 @@ require('lazy').setup({
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
 
-      -- Useful status updates for LSP
+      -- Useful status updates for LSP (fancy animation LSP)
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       {
         'j-hui/fidget.nvim',
         opts = {
           text = {
-            spinner = "dots",
+            spinner = "dots_negative",
           },
           window = {
             relative = "win",
-            blend = 0,
+            blend = 100,
           },
         },
       },
