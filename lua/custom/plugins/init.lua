@@ -3,9 +3,6 @@
 --
 -- See the kickstart.nvim README for more information
 
--- Settings for nvim-tree disable netrw at the very start of your init.lua (strongly advised)
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
 
 -- Autoformat after save file
 vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format({ async = false })]]
@@ -75,15 +72,90 @@ return {
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       require('tokyonight').setup {
-        style = 'storm', -- storm, moon, day, night
-        transparent = false,
+        style = "storm",        -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+        light_style = "day",    -- The theme is used when the background is set to light
+        transparent = false,    -- Enable this to disable setting the background color
+        terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
+        styles = {
+          -- Style to be applied to different syntax groups
+          -- Value is any valid attr-list value for `:help nvim_set_hl`
+          comments = { italic = true },
+          keywords = { italic = true },
+          functions = {},
+          variables = {},
+          -- Background styles. Can be "dark", "transparent" or "normal"
+          sidebars = "dark",              -- style for sidebars, see below
+          floats = "dark",                -- style for floating windows
+        },
+        sidebars = { "qf", "help" },      -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
+        day_brightness = 0.3,             -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
+        hide_inactive_statusline = false, -- Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.
+        dim_inactive = true,              -- dims inactive windows
+        lualine_bold = true,              -- When `true`, section headers in the lualine theme will be bold
       }
       -- load the colorscheme here
-      vim.cmd [[colorscheme tokyonight]]
+      -- vim.cmd [[colorscheme tokyonight]]
     end,
   },
 
-  -- toggleterm
+  -- colorscheme kanagawa
+  {
+    'rebelot/kanagawa.nvim',
+    lazy = false,    -- make sure we load this during startup if it is your main colorscheme
+    priority = 1000, -- make sure to load this before all the other start plugins
+    config = function()
+      require("kanagawa").setup({
+        compile = false,  -- enable compiling the colorscheme
+        undercurl = true, -- enable undercurls
+        commentStyle = { italic = true },
+        functionStyle = {},
+        keywordStyle = { italic = true },
+        statementStyle = { bold = true },
+        typeStyle = {},
+        transparent = false,   -- do not set background color
+        dimInactive = true,    -- dim inactive window `:h hl-NormalNC`
+        terminalColors = true, -- define vim.g.terminal_color_{0,17}
+        theme = "wave",        -- Load "wave" theme when 'background' option is not set
+        background = {
+          -- map the value of 'background' option to a theme
+          dark = "wave", -- try "dragon" !
+          light = "lotus",
+        },
+      })
+      -- load the colorscheme here
+      -- vim.cmd [[colorscheme kanagawa]]
+    end,
+  },
+
+  -- colorscheme gruvbox
+  {
+    'ellisonleao/gruvbox.nvim',
+    lazy = false,    -- make sure we load this during startup if it is your main colorscheme
+    priority = 1000, -- make sure to load this before all the other start plugins
+    config = function()
+      require("gruvbox").setup({
+        undercurl = true,
+        underline = true,
+        bold = true,
+        italic = true,
+        strikethrough = true,
+        invert_selection = false,
+        invert_signs = false,
+        invert_tabline = false,
+        invert_intend_guides = false,
+        inverse = true, -- invert background for search, diffs, statuslines and errors
+        contrast = "",  -- can be "hard", "soft" or empty string
+        palette_overrides = {},
+        overrides = {},
+        dim_inactive = true,
+        transparent_mode = false,
+      })
+      -- load the colorscheme here
+      vim.cmd [[colorscheme gruvbox]]
+    end,
+  },
+
+  -- Toggleterm
   { 'akinsho/toggleterm.nvim', version = '*', config = true },
 
   -- Gitsigns near linenumber
@@ -109,7 +181,6 @@ return {
       local null_ls = require 'null-ls'
       null_ls.setup {
         sources = {
-          -- null_ls.builtins.formatting.stylua,
           null_ls.builtins.formatting.prettier,
           null_ls.builtins.formatting.autopep8,
         },

@@ -41,6 +41,10 @@ P.S. You can delete this when you're done too. It's your config now :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- Settings for nvim-tree disable netrw at the very start of your init.lua (strongly advised)
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
@@ -215,6 +219,15 @@ vim.o.hlsearch = false
 -- Make line numbers default
 vim.wo.number = true
 
+-- Enable relativenumber line
+vim.o.relativenumber = true
+
+-- Enable cursorline
+vim.o.cursorline = true
+
+-- Disable swapfile
+vim.o.swapfile = false
+
 -- Enable mouse mode
 vim.o.mouse = 'a'
 
@@ -240,6 +253,9 @@ vim.wo.signcolumn = 'yes'
 vim.o.updatetime = 250
 vim.o.timeout = true
 vim.o.timeoutlen = 300
+
+-- Enable utocompletion tab menu in command mode
+vim.o.wildmenu = true
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
