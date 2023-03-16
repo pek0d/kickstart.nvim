@@ -25,7 +25,7 @@ vim.keymap.set('n', '<C-s>', ':write<CR>')
 vim.keymap.set('n', '<leader>vv', ':NvimTreeToggle<CR>')
 vim.keymap.set('n', '<leader>gl', '<cmd>lua runLazyGit()<CR>')
 
--- Install custom plugins with setups for Pek0d
+-- Install custom plugins with scustom setups for Pek0d
 return {
   -- nvim-tree
   {
@@ -58,13 +58,12 @@ return {
           dotfiles = false,
         },
         diagnostics = {
-          enable = false,
+          enable = true,
           show_on_dirs = false,
         },
       }
     end,
   },
-
   -- colorscheme tokyonight
   {
     'folke/tokyonight.nvim',
@@ -84,20 +83,19 @@ return {
           functions = {},
           variables = {},
           -- Background styles. Can be "dark", "transparent" or "normal"
-          sidebars = "dark",              -- style for sidebars, see below
-          floats = "dark",                -- style for floating windows
+          sidebars = "dark",             -- style for sidebars, see below
+          floats = "dark",               -- style for floating windows
         },
-        sidebars = { "qf", "help" },      -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
-        day_brightness = 0.3,             -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
-        hide_inactive_statusline = false, -- Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.
-        dim_inactive = true,              -- dims inactive windows
-        lualine_bold = true,              -- When `true`, section headers in the lualine theme will be bold
+        sidebars = { "qf", "help" },     -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
+        day_brightness = 0.3,            -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
+        hide_inactive_statusline = true, -- will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.
+        dim_inactive = true,             -- dims inactive windows
+        lualine_bold = true,             -- When `true`, section headers in the lualine theme will be bold
       }
       -- load the colorscheme here
-      -- vim.cmd [[colorscheme tokyonight]]
+      vim.cmd [[colorscheme tokyonight]]
     end,
   },
-
   -- colorscheme kanagawa
   {
     'rebelot/kanagawa.nvim',
@@ -126,7 +124,6 @@ return {
       -- vim.cmd [[colorscheme kanagawa]]
     end,
   },
-
   -- colorscheme gruvbox
   {
     'ellisonleao/gruvbox.nvim',
@@ -151,13 +148,26 @@ return {
         transparent_mode = false,
       })
       -- load the colorscheme here
-      vim.cmd [[colorscheme gruvbox]]
+      -- vim.cmd [[colorscheme gruvbox]]
     end,
   },
-
+  -- colorscheme vscode
+  {
+    'Mofiqul/vscode.nvim',
+    lazy = false,    -- make sure we load this during startup if it is your main colorscheme
+    priority = 1000, -- make sure to load this before all the other start plugins
+    config = function()
+      require("vscode").setup({
+        transparent = false,
+        italic_comments = true,
+        disable_nvimtree_bg = true,
+      })
+      -- load the colorscheme here
+      -- vim.cmd [[colorscheme vscode]]
+    end,
+  },
   -- Toggleterm
   { 'akinsho/toggleterm.nvim', version = '*', config = true },
-
   -- Gitsigns near linenumber
   {
     'lewis6991/gitsigns.nvim',
@@ -165,7 +175,28 @@ return {
       require('gitsigns').setup {}
     end,
   },
-
+  undercurl = true,
+  underline = true,
+  bold = true,
+  italic = true,
+  strikethrough = true,
+  invert_selection = false,
+  invert_signs = false,
+  invert_tabline = false,
+  invert_intend_guides = false,
+  inverse = true, -- invert background for search, diffs, statuslines and errors
+  contrast = "",  -- can be "hard", "soft" or empty string
+  palette_overrides = {},
+  overrides = {},
+  dim_inactive = true,
+  transparent_mode = false,
+  -- Colorizer
+  {
+    'norcalli/nvim-colorizer.lua',
+    config = function()
+      require('colorizer').setup {}
+    end,
+  },
   -- Autopairs
   {
     'windwp/nvim-autopairs',
@@ -173,7 +204,6 @@ return {
       require('nvim-autopairs').setup {}
     end,
   },
-
   -- null-ls custom formatting
   {
     'jose-elias-alvarez/null-ls.nvim',
