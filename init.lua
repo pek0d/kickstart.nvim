@@ -96,7 +96,7 @@ require('lazy').setup({
           },
           window = {
             relative = "win",
-            blend = 100,
+            blend = 0,
           },
         },
       },
