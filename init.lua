@@ -223,7 +223,7 @@ vim.wo.number = true
 vim.o.relativenumber = true
 
 -- Enable cursorline
-vim.o.cursorline = true
+-- vim.o.cursorline = true
 
 -- Disable swapfile
 vim.o.swapfile = false
