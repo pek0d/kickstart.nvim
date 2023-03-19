@@ -169,28 +169,13 @@ return {
   },
   -- Toggleterm
   { 'akinsho/toggleterm.nvim', version = '*', config = true },
-  -- Gitsigns near linenumber
+  -- Gitsigns
   {
     'lewis6991/gitsigns.nvim',
     config = function()
       require('gitsigns').setup {}
     end,
   },
-  undercurl = true,
-  underline = true,
-  bold = true,
-  italic = true,
-  strikethrough = true,
-  invert_selection = false,
-  invert_signs = false,
-  invert_tabline = false,
-  invert_intend_guides = false,
-  inverse = true, -- invert background for search, diffs, statuslines and errors
-  contrast = "",  -- can be "hard", "soft" or empty string
-  palette_overrides = {},
-  overrides = {},
-  dim_inactive = true,
-  transparent_mode = false,
   -- Colorizer
   {
     'norcalli/nvim-colorizer.lua',
@@ -218,4 +203,15 @@ return {
       }
     end,
   },
+  -- dashboard
+  {
+    'glepnir/dashboard-nvim',
+    event = 'VimEnter',
+    config = function()
+      require('dashboard').setup {
+        -- config
+      }
+    end,
+    dependencies = { { 'nvim-tree/nvim-web-devicons' } }
+  }
 }
