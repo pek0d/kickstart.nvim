@@ -8,6 +8,7 @@
 vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format({ async = false })]]
 
 -- Lazygit run
+---@diagnostic disable-next-line: lowercase-global
 function runLazyGit()
   local Terminal = require('toggleterm.terminal').Terminal
   local run = Terminal:new {
