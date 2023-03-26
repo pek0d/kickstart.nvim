@@ -92,7 +92,7 @@ return {
           floats = "dark",               -- style for floating windows
         },
         sidebars = { "qf", "help" },     -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
-        day_brightness = 0.3,            -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
+        day_brightness = 0.8,            -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
         hide_inactive_statusline = true, -- will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.
         dim_inactive = true,             -- dims inactive windows
         lualine_bold = true,             -- When `true`, section headers in the lualine theme will be bold
@@ -115,7 +115,7 @@ return {
         keywordStyle = { italic = true },
         statementStyle = { bold = true },
         typeStyle = {},
-        transparent = false,   -- do not set background color
+        transparent = true,    -- do not set background color
         dimInactive = true,    -- dim inactive window `:h hl-NormalNC`
         terminalColors = true, -- define vim.g.terminal_color_{0,17}
         theme = "wave",        -- Load "wave" theme when 'background' option is not set
@@ -155,7 +155,7 @@ return {
         palette_overrides = {},
         overrides = {},
         dim_inactive = true,
-        transparent_mode = false,
+        transparent_mode = true,
       })
       -- load the colorscheme here
       -- vim.cmd [[colorscheme gruvbox]]
@@ -168,7 +168,7 @@ return {
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       require("vscode").setup({
-        transparent = false,
+        transparent = true,
         italic_comments = true,
         disable_nvimtree_bg = true,
       })
