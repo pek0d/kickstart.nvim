@@ -263,6 +263,10 @@ vim.o.termguicolors = true
 -- vsplitright as default
 vim.o.splitright = true
 
+-- Enable visible tabs and indents
+vim.o.list = true
+-- vim.o.listchars = "eol:↲,tab:» ,trail:·,extends:<,precedes:>,conceal:┊,nbsp:␣"
+
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
