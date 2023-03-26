@@ -27,7 +27,7 @@ vim.keymap.set('n', '<leader>qq', ':wqall<CR>')
 vim.keymap.set('n', '<leader>vv', ':NvimTreeToggle<CR>')
 vim.keymap.set('n', '<leader>gl', '<cmd>lua runLazyGit()<CR>')
 
--- Install custom plugins with scustom setups for Pek0d
+-- Custom plugins with custom setups for Pek0d
 return {
   -- nvim-tree
   {
@@ -49,10 +49,10 @@ return {
             open_win_config = {
               relative = 'editor',
               border = 'rounded',
-              width = 90,
-              height = 90,
-              row = 80,
-              col = 80,
+              width = 40,
+              height = 30,
+              row = 100,
+              col = 110,
             },
           },
         },
@@ -63,6 +63,9 @@ return {
           enable = true,
           show_on_dirs = false,
         },
+        git = {
+          timeout = 500,
+        }
       }
     end,
   },
@@ -136,7 +139,12 @@ return {
         undercurl = true,
         underline = true,
         bold = true,
-        italic = true,
+        italic = {
+          strings = true,
+          comments = true,
+          operators = false,
+          folds = true,
+        },
         strikethrough = true,
         invert_selection = false,
         invert_signs = false,
