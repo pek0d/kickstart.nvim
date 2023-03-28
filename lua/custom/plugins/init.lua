@@ -23,7 +23,6 @@ end
 
 -- Custom keymaps
 -- vim.keymap.set('n', '<leader>ss', ':write<CR>')
-vim.keymap.set('n', '<leader>qq', ':wqall<CR>')
 vim.keymap.set('n', '<leader>vv', ':NvimTreeToggle<CR>')
 vim.keymap.set('n', '<leader>gl', '<cmd>lua runLazyGit()<CR>')
 
