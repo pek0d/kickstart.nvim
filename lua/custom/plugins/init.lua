@@ -22,7 +22,7 @@ function runLazyGit()
 end
 
 -- Custom keymaps
-vim.keymap.set('n', '<C-s>', ':write<CR>')
+-- vim.keymap.set('n', '<leader>ss', ':write<CR>')
 vim.keymap.set('n', '<leader>qq', ':wqall<CR>')
 vim.keymap.set('n', '<leader>vv', ':NvimTreeToggle<CR>')
 vim.keymap.set('n', '<leader>gl', '<cmd>lua runLazyGit()<CR>')
@@ -64,8 +64,7 @@ return {
           show_on_dirs = false,
         },
         git = {
-          timeout = 500,
-        }
+          timeout = 500, }
       }
     end,
   },
@@ -83,7 +82,7 @@ return {
         keywordStyle = { italic = true },
         statementStyle = { bold = true },
         typeStyle = {},
-        transparent = false,   -- do not set background color
+        transparent = true,    -- do not set background color
         dimInactive = true,    -- dim inactive window `:h hl-NormalNC`
         terminalColors = true, -- define vim.g.terminal_color_{0,17}
         theme = "wave",        -- Load "wave" theme when 'background' option is not set
@@ -94,7 +93,7 @@ return {
         },
       })
       -- load the colorscheme here
-      -- vim.cmd [[colorscheme kanagawa]]
+      vim.cmd [[colorscheme kanagawa]]
     end,
   },
   -- colorscheme gruvbox
@@ -126,7 +125,7 @@ return {
         transparent_mode = true,
       })
       -- load the colorscheme here
-      vim.cmd [[colorscheme gruvbox]]
+      -- vim.cmd [[colorscheme gruvbox]]
     end,
   },
   -- colorscheme vscode
@@ -146,13 +145,6 @@ return {
   },
   -- Toggleterm
   { 'akinsho/toggleterm.nvim', version = '*', config = true },
-  -- Gitsigns color marks
-  {
-    'lewis6991/gitsigns.nvim',
-    config = function()
-      require('gitsigns').setup {}
-    end,
-  },
   -- Colorizer
   {
     'norcalli/nvim-colorizer.lua',
