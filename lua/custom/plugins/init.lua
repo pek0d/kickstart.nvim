@@ -4,9 +4,6 @@
 -- See the kickstart.nvim README for more information
 
 
--- Autoformat after save file
-vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format({ async = false })]]
-
 -- Lazygit run
 ---@diagnostic disable-next-line: lowercase-global
 function runLazyGit()
@@ -22,7 +19,7 @@ function runLazyGit()
 end
 
 -- Custom keymaps
--- vim.keymap.set('n', '<leader>ss', ':write<CR>')
+vim.keymap.set('n', '<C-s>', ':write<CR>')
 vim.keymap.set('n', '<leader>vv', ':NvimTreeToggle<CR>')
 vim.keymap.set('n', '<leader>gl', '<cmd>lua runLazyGit()<CR>')
 
@@ -65,7 +62,7 @@ return {
         git = {
           timeout = 500, }
       }
-    end,
+    end
   },
   -- colorscheme kanagawa
   {
@@ -92,8 +89,8 @@ return {
         },
       })
       -- load the colorscheme here
-      -- vim.cmd [[colorscheme kanagawa]]
-    end,
+      -- vim.cmd.colorscheme "kanagawa"
+    end
   },
   -- colorscheme gruvbox
   {
@@ -124,7 +121,7 @@ return {
         transparent_mode = true,
       })
       -- load the colorscheme here
-      -- vim.cmd [[colorscheme gruvbox]]
+      -- vim.cmd.colorscheme "gruvbox"
     end
   },
   -- colorscheme vscode
@@ -136,17 +133,17 @@ return {
       require("vscode").setup({
         transparent = true,
         italic_comments = true,
-        disable_nvimtree_bg = true,
+        disable_nvimtree_bg = false,
       })
       -- load the colorscheme here
-      -- vim.cmd [[colorscheme vscode]]
+      -- vim.cmd.colorscheme "vscode"
     end
   },
   -- colorscheme catppuccin
   {
     "catppuccin/nvim",
     name = "catppuccin",
-    lazy = false,
+    lazy = true,
     priority = 1000,
     config = function()
       require("catppuccin").setup({
@@ -188,19 +185,19 @@ return {
           nvimtree = true,
           telescope = true,
           notify = false,
-          mini = false,
+          mini = true,
           -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
         },
       })
 
-      -- setup must be called before loading
-      vim.cmd.colorscheme "catppuccin"
+      -- load the colorscheme here
+      -- vim.cmd.colorscheme "catppuccin"
     end
   },
   -- colorscheme tokyonight
   {
     'folke/tokyonight.nvim',
-    lazy = true,
+    lazy = false,
     priority = 1000,
     config = function()
       require("tokyonight").setup({
@@ -227,6 +224,9 @@ return {
         dim_inactive = true,             -- dims inactive windows
         lualine_bold = true,             -- When `true`, section headers in the lualine theme will be bold
       })
+
+      -- load the colorscheme here
+      vim.cmd.colorscheme "tokyonight"
     end
   },
   -- Toggleterm
@@ -238,7 +238,7 @@ return {
       require('colorizer').setup {
         '*',
       }
-    end,
+    end
   },
   -- Autopairs
   {
@@ -258,7 +258,7 @@ return {
           null_ls.builtins.formatting.autopep8,
         },
       }
-    end,
+    end
   },
   {
     "iamcco/markdown-preview.nvim",

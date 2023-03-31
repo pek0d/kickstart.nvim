@@ -459,6 +459,9 @@ local servers = {
   },
 }
 
+-- Autoformat for lua after save file
+vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format({ async = false })]]
+
 -- Setup neovim lua configuration
 require('neodev').setup()
 
