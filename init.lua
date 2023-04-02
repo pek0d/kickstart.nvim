@@ -131,16 +131,6 @@ require('lazy').setup({
   },
 
   {
-    -- Theme inspired by Atom
-    'navarasu/onedark.nvim',
-    lazy = true,
-    -- priority = 1000,
-    config = function()
-      -- vim.cmd.colorscheme 'onedark'
-    end,
-  },
-
-  {
     -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
     -- Enable `lukas-reineke/indent-blankline.nvim`
@@ -524,5 +514,23 @@ cmp.setup {
   },
 }
 
+-- Lazygit run
+---@diagnostic disable-next-line: lowercase-global
+function runLazyGit()
+  local Terminal = require('toggleterm.terminal').Terminal
+  local run = Terminal:new {
+    cmd = 'lazygit',
+    hidden = true,
+    direction = 'float',
+    close_on_exit = true,
+  }
+
+  run:toggle()
+end
+
+-- Custom keymaps
+vim.keymap.set('n', '<C-s>', ':write<CR>')
+vim.keymap.set('n', '<leader>vv', ':NvimTreeToggle<CR>')
+vim.keymap.set('n', '<leader>gl', '<cmd>lua runLazyGit()<CR>')
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

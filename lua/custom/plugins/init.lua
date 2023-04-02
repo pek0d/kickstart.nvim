@@ -1,28 +1,7 @@
 -- You can add your own plugins here or in other files in this directory!
---  I promise not to create any merge conflicts in this directory :)
---
+
 -- See the kickstart.nvim README for more information
-
-
--- Lazygit run
----@diagnostic disable-next-line: lowercase-global
-function runLazyGit()
-  local Terminal = require('toggleterm.terminal').Terminal
-  local run = Terminal:new {
-    cmd = 'lazygit',
-    hidden = true,
-    direction = 'float',
-    close_on_exit = true,
-  }
-
-  run:toggle()
-end
-
--- Custom keymaps
-vim.keymap.set('n', '<C-s>', ':write<CR>')
-vim.keymap.set('n', '<leader>vv', ':NvimTreeToggle<CR>')
-vim.keymap.set('n', '<leader>gl', '<cmd>lua runLazyGit()<CR>')
-
+--
 -- Custom plugins with custom setups for Pek0d
 return {
 
@@ -240,8 +219,5 @@ return {
   },
 
   -- markdown preview
-  {
-    "iamcco/markdown-preview.nvim",
-  },
 
 }
