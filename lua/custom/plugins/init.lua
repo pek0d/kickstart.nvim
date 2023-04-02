@@ -1,8 +1,3 @@
--- You can add your own plugins here or in other files in this directory!
-
--- See the kickstart.nvim README for more information
---
--- Custom plugins with custom setups for Pek0d
 return {
 
   -- nvim-tree
@@ -24,11 +19,11 @@ return {
             enable = true,
             open_win_config = {
               relative = 'editor',
-              border = 'rounded',
-              width = 40,
+              border = 'shadow',
+              width = 50,
               height = 30,
-              row = 100,
-              col = 110,
+              row = 10,
+              col = 100,
             },
           },
         },
@@ -104,22 +99,6 @@ return {
       })
       -- load the colorscheme here
       -- vim.cmd.colorscheme "gruvbox"
-    end
-  },
-
-  -- colorscheme vscode
-  {
-    'Mofiqul/vscode.nvim',
-    lazy = false,    -- make sure we load this during startup if it is your main colorscheme
-    priority = 1000, -- make sure to load this before all the other start plugins
-    config = function()
-      require("vscode").setup({
-        transparent = true,
-        italic_comments = true,
-        disable_nvimtree_bg = false,
-      })
-      -- load the colorscheme here
-      -- vim.cmd.colorscheme "vscode"
     end
   },
 
@@ -219,5 +198,13 @@ return {
   },
 
   -- markdown preview
+  -- after installing by lazy run `:call mkdp#util#install()`
+  {
+    "iamcco/markdown-preview.nvim",
+    lazy = true,
+    run = "cd app && npm install",
+    setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
+    ft = { "markdown" },
+  },
 
 }

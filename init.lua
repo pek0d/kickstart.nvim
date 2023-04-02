@@ -198,6 +198,9 @@ vim.o.hlsearch = false
 -- Make line numbers default
 vim.wo.number = true
 
+--Cursorline enable
+vim.o.cursorline = true
+
 -- Enable relativenumber line
 vim.o.relativenumber = true
 
