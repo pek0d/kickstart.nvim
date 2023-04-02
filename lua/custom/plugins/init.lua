@@ -25,6 +25,7 @@ vim.keymap.set('n', '<leader>gl', '<cmd>lua runLazyGit()<CR>')
 
 -- Custom plugins with custom setups for Pek0d
 return {
+
   -- nvim-tree
   {
     'nvim-tree/nvim-tree.lua',
@@ -64,6 +65,7 @@ return {
       }
     end
   },
+
   -- colorscheme kanagawa
   {
     'rebelot/kanagawa.nvim',
@@ -92,6 +94,7 @@ return {
       vim.cmd.colorscheme "kanagawa"
     end
   },
+
   -- colorscheme gruvbox
   {
     'ellisonleao/gruvbox.nvim',
@@ -124,6 +127,7 @@ return {
       -- vim.cmd.colorscheme "gruvbox"
     end
   },
+
   -- colorscheme vscode
   {
     'Mofiqul/vscode.nvim',
@@ -139,6 +143,7 @@ return {
       -- vim.cmd.colorscheme "vscode"
     end
   },
+
   -- colorscheme catppuccin
   {
     "catppuccin/nvim",
@@ -194,12 +199,14 @@ return {
       -- vim.cmd.colorscheme "catppuccin"
     end
   },
+
   -- Toggleterm
   {
     'akinsho/toggleterm.nvim',
     version = '*',
     config = true
   },
+
   -- Colorizer
   {
     'norcalli/nvim-colorizer.lua',
@@ -209,13 +216,15 @@ return {
       }
     end
   },
+
   -- Autopairs
   {
     'windwp/nvim-autopairs',
     config = function()
       require('nvim-autopairs').setup {}
-    end,
+    end
   },
+
   -- null-ls custom formatting
   {
     'jose-elias-alvarez/null-ls.nvim',
@@ -229,10 +238,10 @@ return {
       }
     end
   },
+
   -- markdown preview
   {
     "iamcco/markdown-preview.nvim",
-    run = function() vim.fn["mkdp#util#install"]() end,
   },
 
 }
