@@ -1,43 +1,54 @@
 return {
-
   -- nvim-tree
+  -- {
+  --   'nvim-tree/nvim-tree.lua',
+  --   version = '*',
+  --   dependencies = {
+  --     'nvim-tree/nvim-web-devicons',
+  --   },
+  --   config = function()
+  --     require('nvim-tree').setup {
+  --       actions = {
+  --         open_file = {
+  --           quit_on_open = true,
+  --         },
+  --       },
+  --       view = {
+  --         float = {
+  --           enable = true,
+  --           open_win_config = {
+  --             relative = 'editor',
+  --             -- border = 'shadow',
+  --             width = 50,
+  --             height = 30,
+  --             row = 10,
+  --             col = 100,
+  --           },
+  --         },
+  --       },
+  --       filters = {
+  --         dotfiles = false,
+  --       },
+  --       diagnostics = {
+  --         enable = true,
+  --         show_on_dirs = false,
+  --       },
+  --       git = {
+  --         timeout = 500, }
+  --     }
+  --   end
+  -- },
+
+  -- neo-tree
   {
-    'nvim-tree/nvim-tree.lua',
-    version = '*',
+    'nvim-neo-tree/neo-tree.nvim',
+    branch = "v2.x",
     dependencies = {
+      'nvim-lua/plenary.nvim',
       'nvim-tree/nvim-web-devicons',
-    },
-    config = function()
-      require('nvim-tree').setup {
-        actions = {
-          open_file = {
-            quit_on_open = true,
-          },
-        },
-        view = {
-          float = {
-            enable = true,
-            open_win_config = {
-              relative = 'editor',
-              border = 'shadow',
-              width = 50,
-              height = 30,
-              row = 10,
-              col = 100,
-            },
-          },
-        },
-        filters = {
-          dotfiles = false,
-        },
-        diagnostics = {
-          enable = true,
-          show_on_dirs = false,
-        },
-        git = {
-          timeout = 500, }
-      }
-    end
+      'MunifTanjim/nui.nvim',
+      's1n7ax/nvim-window-picker'
+    }
   },
 
   -- colorscheme kanagawa
