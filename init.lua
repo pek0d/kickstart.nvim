@@ -92,10 +92,10 @@ require('lazy').setup({
         'j-hui/fidget.nvim',
         opts = {
           text = {
-            spinner = "dots_negative",
+            spinner = 'dots_negative',
           },
           window = {
-            relative = "win",
+            relative = 'win',
             blend = 100,
           },
         },
@@ -117,11 +117,12 @@ require('lazy').setup({
       'hrsh7th/cmp-cmdline',
       'hrsh7th/nvim-cmp',
       'L3MON4D3/LuaSnip',
-      'saadparwaiz1/cmp_luasnip' },
+      'saadparwaiz1/cmp_luasnip',
+    },
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',          opts = {} },
+  { 'folke/which-key.nvim', opts = {} },
 
   -- Adds git releated signs to the gutter, as well as utilities for managing changes
   {
@@ -150,7 +151,7 @@ require('lazy').setup({
   },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim',         opts = {} },
+  { 'numToStr/Comment.nvim', opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
   { 'nvim-telescope/telescope.nvim', version = '*', dependencies = { 'nvim-lua/plenary.nvim' } },
@@ -195,7 +196,6 @@ require('lazy').setup({
   --    to get rid of the warning telling you that there are not plugins in `lua/custom/plugins/`.
   { import = 'custom.plugins' },
 }, {})
-
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
@@ -378,10 +378,10 @@ require('nvim-treesitter.configs').setup {
 }
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
@@ -542,5 +542,8 @@ end
 vim.keymap.set('n', '<C-s>', ':write<CR>')
 vim.keymap.set('n', '<leader>e', ':Neotree float toggle=true<CR>')
 vim.keymap.set('n', '<leader>gl', '<cmd>lua runLazyGit()<CR>')
+vim.keymap.set('n', '<Tab>', '<cmd>bn<CR>')
+vim.keymap.set('n', '<S-Tab>', '<cmd>bp<CR>')
+vim.keymap.set('n', '<space>bd', '<cmd>bd<CR>')
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
