@@ -18,6 +18,6 @@ return {
         undercurl = true, -- true/false; for global undercurl
       },
     }
-    vim.cmd [[colorscheme NeoSolarized]]
+    -- vim.cmd [[colorscheme NeoSolarized]]
   end,
 }
