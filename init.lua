@@ -524,18 +524,23 @@ cmp.setup {
     { name = 'buffer' },
   },
 }
+-- Lazygit run
+-- @diagnostic disable-next-line: lowercase-global
+function runLazyGit()
+  local Terminal = require('toggleterm.terminal').Terminal
+  local run = Terminal:new {
+    cmd = 'lazygit',
+    hidden = true,
+    direction = 'float',
+    close_on_exit = true,
+  }
+
+  run:toggle()
+end
 
 -- Custom keymaps
 vim.keymap.set('n', '<C-s>', ':write<CR>')
 vim.keymap.set('n', '<leader>e', ':Neotree float toggle=true<CR>')
--- vim.keymap.set('n', '<leader>gl', '<cmd>lua runLazyGit()<CR>')
-local Terminal = require('toggleterm.terminal').Terminal
-local lazygit  = Terminal:new({ cmd = "lazygit", hidden = true })
-
-function _lazygit_toggle()
-  lazygit:toggle()
-end
-
-vim.api.nvim_set_keymap("n", "<leader>gl", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>gl', '<cmd>lua runLazyGit()<CR>')
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
