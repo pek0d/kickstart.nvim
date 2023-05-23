@@ -200,6 +200,9 @@ require('lazy').setup({
 -- [[ Setting options ]]
 -- See `:help vim.o`
 
+-- Turno off line wrap (выключение переноса слов)
+vim.o.wrap = false
+
 -- Set highlight on search
 vim.o.hlsearch = false
 
