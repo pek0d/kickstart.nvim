@@ -6,7 +6,7 @@ return {
   config = function()
     require('onedarkpro').setup {
       options = {
-        transparency = false,
+        transparency = true,
         highlight_inactive_windows = true,
       },
       styles = {
