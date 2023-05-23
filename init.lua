@@ -248,7 +248,7 @@ vim.o.timeoutlen = 300
 vim.o.wildmenu = true
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
+vim.o.completeopt = 'menu,menuone,noselect'
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
@@ -548,5 +548,6 @@ vim.keymap.set('n', '<leader>gl', '<cmd>lua runLazyGit()<CR>')
 vim.keymap.set('n', '<Tab>', '<cmd>bn<CR>')
 vim.keymap.set('n', '<S-Tab>', '<cmd>bp<CR>')
 vim.keymap.set('n', '<space>bd', '<cmd>bd<CR>')
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
