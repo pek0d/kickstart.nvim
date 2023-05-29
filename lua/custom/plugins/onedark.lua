@@ -3,7 +3,7 @@ return {
   'navarasu/onedark.nvim',
   lazy = true,
   config = function()
-    require('onedarkpro').setup {
+    require('onedark').setup {
       -- Main options --
       style = 'dark', -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
       transparent = false, -- Show/hide background
