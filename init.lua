@@ -200,7 +200,10 @@ require('lazy').setup({
 -- [[ Setting options ]]
 -- See `:help vim.o`
 
--- Turno off line wrap (выключение переноса слов)
+-- NOTE: You should make sure your terminal supports this
+vim.o.termguicolors = true
+
+-- Turn off line wrap (выключение переноса слов)
 vim.o.wrap = false
 
 -- Set highlight on search
@@ -209,7 +212,7 @@ vim.o.hlsearch = false
 -- Make line numbers default
 vim.wo.number = true
 
---Cursorline enable
+-- Cursorline enable
 vim.o.cursorline = true
 
 -- Enable relativenumber line
@@ -249,9 +252,6 @@ vim.o.wildmenu = true
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menu,menuone,noselect'
-
--- NOTE: You should make sure your terminal supports this
-vim.o.termguicolors = true
 
 -- vsplitright as default
 vim.o.splitright = true
