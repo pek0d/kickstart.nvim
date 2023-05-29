@@ -18,6 +18,6 @@ return {
       },
     }
     -- load the colorscheme here
-    vim.cmd [[colorscheme onedark]]
+    -- vim.cmd [[colorscheme onedark]]
   end,
 }
