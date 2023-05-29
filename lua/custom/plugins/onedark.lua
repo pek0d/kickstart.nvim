@@ -9,7 +9,7 @@ return {
       transparent = false, -- Show/hide background
       term_colors = true, -- Change terminal color as per the selected theme style
       ending_tildes = false, -- Show the end-of-buffer tildes. By default they are hidden
-      cmp_itemkind_reverse = false, -- reverse item kind highlights in cmp menu
+      cmp_itemkind_reverse = true, -- reverse item kind highlights in cmp menu
 
       -- toggle theme style ---
       toggle_style_key = nil, -- keybind to toggle theme style. Leave it nil to disable it, or set it to a string, for example "<leader>ts"
@@ -23,7 +23,7 @@ return {
         keywords = 'bold',
         functions = 'none',
         strings = 'none',
-        variables = 'bold italic',
+        variables = 'none',
       },
 
       -- Custom Highlights --
@@ -37,7 +37,7 @@ return {
         background = true, -- use background color for virtual text
       },
       -- load the colorscheme here
-      -- vim.cmd [[colorscheme onedark]]
+      vim.cmd [[colorscheme onedark]],
     }
   end,
 }
