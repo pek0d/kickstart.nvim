@@ -558,7 +558,7 @@ cmp.setup {
   },
 }
 
---[[Pekod's custom settings]]
+--[[Pekod's custom neovim settings]]
 --- Autoformat for lua after save file
 vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format({ async = false })]]
 
