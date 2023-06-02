@@ -101,6 +101,49 @@ require('lazy').setup({
         },
       },
 
+      -- colorscheme onedark
+      {
+        'navarasu/onedark.nvim',
+        priority = 1000, -- make sure to load this before all the other start plugins
+        config = function()
+          require('onedark').setup {
+            -- Main options --
+            style = 'dark', -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
+            transparent = false, -- Show/hide background
+            term_colors = true, -- Change terminal color as per the selected theme style
+            ending_tildes = false, -- Show the end-of-buffer tildes. By default they are hidden
+            cmp_itemkind_reverse = true, -- reverse item kind highlights in cmp menu
+
+            -- toggle theme style ---
+            toggle_style_key = nil, -- keybind to toggle theme style. Leave it nil to disable it, or set it to a string, for example "<leader>ts"
+            toggle_style_list = { 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer', 'light' }, -- List of styles to toggle between
+
+            -- Change code style ---
+            -- Options are italic, bold, underline, none
+            -- You can configure multiple style with comma separated, For e.g., keywords = 'italic,bold'
+            code_style = {
+              comments = 'italic',
+              keywords = 'bold',
+              functions = 'none',
+              strings = 'none',
+              variables = 'none',
+            },
+
+            -- Custom Highlights --
+            colors = {}, -- Override default colors
+            highlights = {}, -- Override highlight groups
+
+            -- Plugins Config --
+            diagnostics = {
+              darker = true, -- darker colors for diagnostic
+              undercurl = true, -- use undercurl instead of underline for diagnostics
+              background = true, -- use background color for virtual text
+            },
+            -- load the colorscheme here
+            vim.cmd [[colorscheme onedark]],
+          }
+        end,
+      },
       -- Additional lua configuration, makes nvim stuff amazing!
       { 'folke/neodev.nvim' },
     },
@@ -308,6 +351,7 @@ vim.keymap.set('n', '<leader>/', function()
   })
 end, { desc = '[/] Fuzzily search in current buffer' })
 
+vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
@@ -386,6 +430,7 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnos
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
+-- [[ Configure LSP ]]
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
@@ -451,9 +496,6 @@ local servers = {
   },
 }
 
--- Autoformat for lua after save file
-vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format({ async = false })]]
-
 -- Setup neovim lua configuration
 require('neodev').setup()
 
@@ -481,7 +523,8 @@ mason_lspconfig.setup_handlers {
   end,
 }
 
--- nvim-cmp setup
+-- [[ Configure nvim-cmp ]]
+-- See `:help cmp`
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 
@@ -527,6 +570,11 @@ cmp.setup {
     { name = 'buffer' },
   },
 }
+
+--[[Pekod's custom settings]]
+--- Autoformat for lua after save file
+vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format({ async = false })]]
+
 -- Lazygit run
 -- @diagnostic disable-next-line: lowercase-global
 function runLazyGit()
@@ -545,8 +593,8 @@ end
 vim.keymap.set('n', '<C-s>', ':write<CR>')
 vim.keymap.set('n', '<leader>e', ':Neotree float toggle=true<CR>')
 vim.keymap.set('n', '<leader>gl', '<cmd>lua runLazyGit()<CR>')
-vim.keymap.set('n', '<Tab>', '<cmd>bn<CR>')
-vim.keymap.set('n', '<S-Tab>', '<cmd>bp<CR>')
+-- vim.keymap.set('n', '<Tab>', '<cmd>bn<CR>')
+-- vim.keymap.set('n', '<S-Tab>', '<cmd>bp<CR>')
 vim.keymap.set('n', '<space>bd', '<cmd>bd<CR>')
 
 -- The line beneath this is called `modeline`. See `:help modeline`
