@@ -18,6 +18,7 @@ return {
         undercurl = true, -- true/false; for global undercurl
       },
     }
+    -- Activate colorscheme as global theme
     -- vim.cmd [[colorscheme NeoSolarized]]
   end,
 }
