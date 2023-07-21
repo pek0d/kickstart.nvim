@@ -1,26 +1,38 @@
 --[[
+
 =====================================================================
 ==================== READ THIS BEFORE CONTINUING ====================
 =====================================================================
+
 Kickstart.nvim is *not* a distribution.
+
 Kickstart.nvim is a template for your own configuration.
   The goal is that you can read every line of code, top-to-bottom, understand
   what your configuration is doing, and modify it to suit your needs.
+
   Once you've done that, you should start exploring, configuring and tinkering to
   explore Neovim!
+
   If you don't know anything about Lua, I recommend taking some time to read through
   a guide. One possible example:
   - https://learnxinyminutes.com/docs/lua/
+
   And then you can explore or search through `:help lua-guide`
+
+
 Kickstart Guide:
+
 I have left several `:help X` comments throughout the init.lua
 You should run that command and read that help section for more information.
+
 In addition, I have some `NOTE:` items throughout the file.
 These are for you, the reader to help understand what is happening. Feel free to delete
 them once you know what you're doing, but they should serve as a guide for when you
 are first encountering a few different constructs in your nvim config.
+
 I hope you enjoy your Neovim journey,
 - TJ
+
 P.S. You can delete this when you're done too. It's your config now :)
 --]]
 -- Set <space> as the leader key
@@ -72,7 +84,18 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
+      {
+        'j-hui/fidget.nvim',
+        tag = 'legacy',
+        opts = {
+          text = {
+            spinner = 'dots_pulse', -- animation shown when tasks are ongoing
+            done = '✔', -- character shown when all tasks are complete
+            commenced = 'Started', -- message shown when task starts
+            completed = 'Completed', -- message shown when task completes
+          },
+        },
+      },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -118,6 +141,28 @@ require('lazy').setup({
   },
 
   {
+    -- Theme inspired by Atom
+    'navarasu/onedark.nvim',
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme 'gruvbox'
+    end,
+  },
+
+  {
+    -- Set lualine as statusline
+    'nvim-lualine/lualine.nvim',
+    -- See `:help lualine.txt`
+    opts = {
+      options = {
+        icons_enabled = false,
+        component_separators = '|',
+        section_separators = '',
+      },
+    },
+  },
+
+  {
     -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
     -- Enable `lukas-reineke/indent-blankline.nvim`
@@ -156,43 +201,174 @@ require('lazy').setup({
     build = ':TSUpdate',
   },
 
+  {
+    'nvim-neo-tree/neo-tree.nvim',
+    version = '*',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
+      'MunifTanjim/nui.nvim',
+    },
+    config = function()
+      require('neo-tree').setup {}
+    end,
+  },
+
+  {
+    'NvChad/nvim-colorizer.lua',
+    lazy = false,
+    config = function()
+      require('colorizer').setup {
+        filetypes = { '*' },
+        user_default_options = {
+          RGB = true, -- #RGB hex codes
+          RRGGBB = true, -- #RRGGBB hex codes
+          names = true, -- "Name" codes like Blue or blue
+          RRGGBBAA = false, -- #RRGGBBAA hex codes
+          AARRGGBB = false, -- 0xAARRGGBB hex codes
+          rgb_fn = false, -- CSS rgb() and rgba() functions
+          hsl_fn = false, -- CSS hsl() and hsla() functions
+          css = false, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+          css_fn = false, -- Enable all CSS *functions*: rgb_fn, hsl_fn
+          -- Available modes for `mode`: foreground, background,  virtualtext
+          mode = 'background', -- Set the display mode.
+          -- Available methods are false / true / "normal" / "lsp" / "both"
+          -- True is same as normal
+          tailwind = false, -- Enable tailwind colors
+          -- parsers can contain values used in |user_default_options|
+          sass = { enable = false, parsers = { 'css' } }, -- Enable sass colors
+          virtualtext = '■',
+          -- update color values even if buffer is not focused
+          -- example use: cmp_menu, cmp_docs
+          always_update = false,
+        },
+        -- all the sub-options of filetypes apply to buftypes
+        buftypes = {},
+      }
+    end,
+  },
+  -- Toggleterm
+  {
+    'akinsho/toggleterm.nvim',
+    version = '*',
+    config = function() end,
+  },
+  -- markdown preview
+  {
+    'iamcco/markdown-preview.nvim',
+    lazy = false,
+    run = 'cd app && npm install',
+    setup = function()
+      vim.g.mkdp_filetypes = { 'markdown' }
+    end,
+    ft = { 'markdown' },
+  },
+
+  -- Autopairs
+  {
+    'windwp/nvim-autopairs',
+    config = function()
+      require('nvim-autopairs').setup {}
+    end,
+  },
+  {
+    'ellisonleao/gruvbox.nvim',
+    lazy = true, -- make sure we load this during startup if it is your main colorscheme
+    priority = 1000, -- make sure to load this before all the other start plugins
+    config = function()
+      require('gruvbox').setup {
+        undercurl = true,
+        underline = true,
+        bold = true,
+        italic = {
+          strings = true,
+          comments = true,
+          operators = false,
+          folds = true,
+        },
+        strikethrough = true,
+        invert_selection = false,
+        invert_signs = false,
+        invert_tabline = false,
+        invert_intend_guides = false,
+        inverse = true, -- invert background for search, diffs, statuslines and errors
+        contrast = '', -- can be "hard", "soft" or empty string
+        palette_overrides = {},
+        overrides = {},
+        dim_inactive = true,
+        transparent_mode = false,
+      }
+      -- load the colorscheme here
+      -- vim.cmd.colorscheme 'gruvbox'
+    end,
+  },
+  {
+    'Tsuzat/NeoSolarized.nvim',
+    lazy = false,
+    config = function()
+      require('NeoSolarized').setup {
+        style = 'dark', -- "dark" or "light"
+        transparent = false, -- true/false; Enable this to disable setting the background color
+        terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
+        enable_italics = true, -- Italics for different hightlight groups (eg. Statement, Condition, Comment, Include, etc.)
+        styles = {
+          -- Style to be applied to different syntax groups
+          comments = { italic = true },
+          keywords = { italic = true },
+          functions = { bold = true },
+          variables = {},
+          string = { italic = true },
+          underline = true, -- true/false; for global underline
+          undercurl = true, -- true/false; for global undercurl
+        },
+      }
+      -- Activate colorscheme as global theme
+      -- vim.cmd [[colorscheme NeoSolarized]]
+    end,
+  },
+
+  {
+    'jose-elias-alvarez/null-ls.nvim',
+    event = { 'BufReadPre', 'BufNewFile' },
+    dependencies = { 'mason.nvim' },
+    config = function()
+      local null_ls = require 'null-ls'
+      local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
+
+      null_ls.setup {
+        root_dir = require('null-ls.utils').root_pattern('.null-ls-root', '.neoconf.json', 'Makefile', '.git'),
+        sources = {
+          null_ls.builtins.formatting.stylua,
+          null_ls.builtins.formatting.prettier,
+          null_ls.builtins.formatting.autopep8,
+        },
+      }
+    end,
+  },
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
   -- require 'kickstart.plugins.autoformat',
   -- require 'kickstart.plugins.debug',
 
-  -- NOTE: The import below automatically adds your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
+  -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
   --    up-to-date with whatever is in the kickstart repo.
+  --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
-  { import = 'custom.plugins' },
+  -- { import = 'custom.plugins' },
 }, {})
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
-
--- NOTE: You should make sure your terminal supports this
-vim.o.termguicolors = true
-
--- Turn off line wrap (выключение переноса слов)
-vim.o.wrap = false
+-- NOTE: You can change these options as you wish!
 
 -- Set highlight on search
 vim.o.hlsearch = false
 
 -- Make line numbers default
 vim.wo.number = true
-
--- Cursorline enable
-vim.o.cursorline = true
-
--- Enable relativenumber line
-vim.o.relativenumber = true
-
--- Disable swapfile
-vim.o.swapfile = false
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
@@ -208,7 +384,7 @@ vim.o.breakindent = true
 -- Save undo history
 vim.o.undofile = true
 
--- Case insensitive searching UNLESS /C or capital in search
+-- Case-insensitive searching UNLESS \C or capital in search
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
@@ -217,21 +393,13 @@ vim.wo.signcolumn = 'yes'
 
 -- Decrease update time
 vim.o.updatetime = 250
-vim.o.timeout = true
 vim.o.timeoutlen = 300
 
--- Enable autocompletion tab menu in command mode
-vim.o.wildmenu = true
-
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menu,menuone,noselect'
+vim.o.completeopt = 'menuone,noselect'
 
--- vsplitright as default
-vim.o.splitright = true
-
--- Enable visible tabs and indents
-vim.o.list = true
--- vim.o.listchars = "eol:↲,tab:» ,trail:·,extends:<,precedes:>,conceal:┊,nbsp:␣"
+-- NOTE: You should make sure your terminal supports this
+vim.o.termguicolors = true
 
 -- [[ Basic Keymaps ]]
 
@@ -292,13 +460,13 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'go', 'lua', 'python', 'rust', 'vim', 'vimdoc' },
+  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
 
   highlight = { enable = true },
-  indent = { enable = true, disable = { 'python' } },
+  indent = { enable = true },
   incremental_selection = {
     enable = true,
     keymaps = {
@@ -361,7 +529,6 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open float
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- [[ Configure LSP ]]
--- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
   -- NOTE: Remember that lua is a real programming language, and as such it is possible
@@ -414,7 +581,7 @@ end
 local servers = {
   -- clangd = {},
   -- gopls = {},
-  pyright = {},
+  -- pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
 
@@ -432,9 +599,6 @@ require('neodev').setup()
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-
--- Setup mason so it can manage external tooling
-require('mason').setup()
 
 -- Ensure the servers above are installed
 local mason_lspconfig = require 'mason-lspconfig'
@@ -457,7 +621,7 @@ mason_lspconfig.setup_handlers {
 -- See `:help cmp`
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
-
+require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
 
 cmp.setup {
@@ -467,6 +631,8 @@ cmp.setup {
     end,
   },
   mapping = cmp.mapping.preset.insert {
+    ['<C-n>'] = cmp.mapping.select_next_item(),
+    ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete {},
@@ -477,7 +643,7 @@ cmp.setup {
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
+      elseif luasnip.expand_or_locally_jumpable() then
         luasnip.expand_or_jump()
       else
         fallback()
@@ -486,7 +652,7 @@ cmp.setup {
     ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
+      elseif luasnip.locally_jumpable(-1) then
         luasnip.jump(-1)
       else
         fallback()
@@ -496,12 +662,14 @@ cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
-    { name = 'path' },
-    { name = 'buffer' },
   },
 }
 
---[[Pekod's custom neovim settings]]
+-- The line beneath this is called `modeline`. See `:help modeline`
+-- vim: ts=2 sts=2 sw=2 et
+
+--[[PEKOD'S CUSTOM NEOVIM SETTINGS]]
+
 --- Autoformat for lua after save file
 vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format({ async = false })]]
 
@@ -526,6 +694,3 @@ vim.keymap.set('n', '<leader>gl', '<cmd>lua runLazyGit()<CR>')
 -- vim.keymap.set('n', '<Tab>', '<cmd>bn<CR>')
 -- vim.keymap.set('n', '<S-Tab>', '<cmd>bp<CR>')
 vim.keymap.set('n', '<space>bd', '<cmd>bd<CR>')
-
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
