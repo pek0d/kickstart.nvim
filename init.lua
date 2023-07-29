@@ -668,9 +668,9 @@ cmp.setup {
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
 
---[[PEKOD'S CUSTOM NEOVIM SETTINGS]]
+-- [[PEKOD'S CUSTOM NEOVIM SETTINGS]]
 
---- Autoformat for lua after save file
+-- Autoformat for lua after save file
 vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format({ async = false })]]
 
 -- Lazygit run
