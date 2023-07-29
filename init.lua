@@ -158,6 +158,7 @@ require('lazy').setup({
         icons_enabled = false,
         component_separators = '|',
         section_separators = '',
+        theme = 'vscode',
       },
     },
   },
@@ -302,9 +303,10 @@ require('lazy').setup({
       -- vim.cmd.colorscheme 'gruvbox'
     end,
   },
+
   {
     'Tsuzat/NeoSolarized.nvim',
-    lazy = false,
+    lazy = true,
     config = function()
       require('NeoSolarized').setup {
         style = 'dark', -- "dark" or "light"
@@ -325,6 +327,11 @@ require('lazy').setup({
       -- Activate colorscheme as global theme
       -- vim.cmd [[colorscheme NeoSolarized]]
     end,
+  },
+
+  {
+    'Mofiqul/vscode.nvim',
+    lazy = false,
   },
 
   {
