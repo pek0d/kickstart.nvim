@@ -145,7 +145,7 @@ require('lazy').setup({
     'navarasu/onedark.nvim',
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'gruvbox'
+      -- vim.cmd.colorscheme 'onedark'
     end,
   },
 
@@ -155,10 +155,10 @@ require('lazy').setup({
     -- See `:help lualine.txt`
     opts = {
       options = {
-        icons_enabled = false,
-        component_separators = '|',
-        section_separators = '',
+        icons_enabled = true,
         theme = 'vscode',
+        component_separators = '',
+        section_separators = '',
       },
     },
   },
@@ -202,6 +202,7 @@ require('lazy').setup({
     build = ':TSUpdate',
   },
 
+  -- neo-tree filebrowser
   {
     'nvim-neo-tree/neo-tree.nvim',
     version = '*',
@@ -215,6 +216,7 @@ require('lazy').setup({
     end,
   },
 
+  -- colors right in nvim
   {
     'NvChad/nvim-colorizer.lua',
     lazy = false,
@@ -248,12 +250,14 @@ require('lazy').setup({
       }
     end,
   },
+
   -- Toggleterm
   {
     'akinsho/toggleterm.nvim',
     version = '*',
-    config = function() end,
+    config = true,
   },
+
   -- markdown preview
   {
     'iamcco/markdown-preview.nvim',
@@ -272,9 +276,11 @@ require('lazy').setup({
       require('nvim-autopairs').setup {}
     end,
   },
+
+  -- theme Gruvbox
   {
     'ellisonleao/gruvbox.nvim',
-    lazy = true, -- make sure we load this during startup if it is your main colorscheme
+    lazy = false, -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       require('gruvbox').setup {
@@ -288,22 +294,23 @@ require('lazy').setup({
           folds = true,
         },
         strikethrough = true,
-        invert_selection = false,
+        invert_selection = true,
         invert_signs = false,
         invert_tabline = false,
         invert_intend_guides = false,
         inverse = true, -- invert background for search, diffs, statuslines and errors
-        contrast = '', -- can be "hard", "soft" or empty string
+        contrast = 'soft', -- can be "hard", "soft" or empty string
         palette_overrides = {},
         overrides = {},
         dim_inactive = true,
         transparent_mode = false,
       }
-      -- load the colorscheme here
-      -- vim.cmd.colorscheme 'gruvbox'
+      -- Activate the colorscheme here
+      vim.cmd.colorscheme 'gruvbox'
     end,
   },
 
+  -- theme 'NeoSolarized'
   {
     'Tsuzat/NeoSolarized.nvim',
     lazy = true,
@@ -329,11 +336,14 @@ require('lazy').setup({
     end,
   },
 
+  -- theme vscode
   {
     'Mofiqul/vscode.nvim',
     lazy = false,
+    priority = 1000,
   },
 
+  -- null_ls formatter
   {
     'jose-elias-alvarez/null-ls.nvim',
     event = { 'BufReadPre', 'BufNewFile' },
@@ -343,6 +353,7 @@ require('lazy').setup({
       local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
 
       null_ls.setup {
+        group = augroup,
         root_dir = require('null-ls.utils').root_pattern('.null-ls-root', '.neoconf.json', 'Makefile', '.git'),
         sources = {
           null_ls.builtins.formatting.stylua,
@@ -467,7 +478,7 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim' },
+  ensure_installed = { 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -680,24 +691,27 @@ cmp.setup {
 -- Autoformat for lua after save file
 vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format({ async = false })]]
 
--- Lazygit run
--- @diagnostic disable-next-line: lowercase-global
-function runLazyGit()
-  local Terminal = require('toggleterm.terminal').Terminal
-  local run = Terminal:new {
-    cmd = 'lazygit',
-    hidden = true,
-    direction = 'float',
-    close_on_exit = true,
-  }
-
-  run:toggle()
+-- Lazygit toggle run
+local Terminal = require('toggleterm.terminal').Terminal
+local lazygit = Terminal:new {
+  cmd = 'lazygit',
+  hidden = true,
+  direction = 'float',
+  close_on_exit = true,
+  float_opts = {
+    border = 'double',
+  },
+}
+---@diagnostic disable-next-line: lowercase-global
+function _lazygit_toggle()
+  lazygit:toggle()
 end
 
+vim.api.nvim_set_keymap('n', '<leader>gl', '<cmd>lua _lazygit_toggle()<CR>', { noremap = true, silent = true })
+
 -- Custom keymaps
-vim.keymap.set('n', '<C-s>', ':write<CR>')
-vim.keymap.set('n', '<leader>e', ':Neotree float toggle=true<CR>')
-vim.keymap.set('n', '<leader>gl', '<cmd>lua runLazyGit()<CR>')
+vim.keymap.set('n', '<C-s>', ':write<CR>', { desc = 'Save file' })
+vim.keymap.set('n', '<leader>e', ':Neotree float toggle=true<CR>', { desc = 'Open Neotree' })
 -- vim.keymap.set('n', '<Tab>', '<cmd>bn<CR>')
 -- vim.keymap.set('n', '<S-Tab>', '<cmd>bp<CR>')
 vim.keymap.set('n', '<space>bd', '<cmd>bd<CR>')
