@@ -120,6 +120,7 @@ require('lazy').setup({
 
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim', opts = {} },
+
   {
     -- Adds git releated signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -141,15 +142,6 @@ require('lazy').setup({
   },
 
   {
-    -- Theme inspired by Atom
-    'navarasu/onedark.nvim',
-    priority = 1000,
-    config = function()
-      -- vim.cmd.colorscheme 'onedark'
-    end,
-  },
-
-  {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
     -- See `:help lualine.txt`
@@ -159,23 +151,7 @@ require('lazy').setup({
         theme = 'vscode',
         component_separators = { left = '', right = '' },
         section_separators = '',
-        -- always_divide_middle = false,
-        sections = {
-          lualine_a = { 'mode' },
-          lualine_b = { 'branch', 'diff', 'diagnostics' },
-          lualine_c = { 'filename' },
-          lualine_x = { 'encoding', 'fileformat', 'filetype' },
-          lualine_y = { 'progress' },
-          lualine_z = { 'location' },
-        },
-        inactive_sections = {
-          lualine_a = {},
-          lualine_b = {},
-          lualine_c = { 'filename' },
-          lualine_x = { 'location' },
-          lualine_y = {},
-          lualine_z = {},
-        },
+        sections = { lualine_c = { '%=', '%t%m', '%3p' } },
       },
     },
   },
@@ -233,7 +209,7 @@ require('lazy').setup({
     end,
   },
 
-  -- colors right in nvim
+  -- See colors right in nvim
   {
     'NvChad/nvim-colorizer.lua',
     lazy = false,
@@ -268,7 +244,7 @@ require('lazy').setup({
     end,
   },
 
-  -- Toggleterm
+  -- Toggleterm (for lazygit)
   {
     'akinsho/toggleterm.nvim',
     version = '*',
@@ -291,6 +267,16 @@ require('lazy').setup({
     'windwp/nvim-autopairs',
     config = function()
       require('nvim-autopairs').setup {}
+    end,
+  },
+
+  -- theme inspired by Atom
+  {
+    'navarasu/onedark.nvim',
+    priority = 1000,
+    config = function()
+      -- Activate the colorscheme here
+      -- vim.cmd.colorscheme 'onedark'
     end,
   },
 
@@ -362,7 +348,7 @@ require('lazy').setup({
     priority = 1000,
   },
 
-  -- null_ls formatter
+  -- null_ls autoformatter
   {
     'jose-elias-alvarez/null-ls.nvim',
     event = { 'BufReadPre', 'BufNewFile' },
@@ -404,7 +390,7 @@ require('lazy').setup({
 -- Set highlight on search
 vim.o.hlsearch = false
 
--- Set cursorline
+-- Set cursorline and line number
 vim.o.cursorline = true
 vim.o.cursorlineopt = 'both'
 
@@ -712,7 +698,7 @@ cmp.setup {
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
 
--- [[PEKOD'S CUSTOM NEOVIM SETTINGS]]
+-- [[PEKOD'S ADDITIONAL CUSTOM NEOVIM SETTINGS]]
 
 -- Autoformat for lua after save file
 vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format({ async = false })]]
@@ -733,11 +719,9 @@ function _lazygit_toggle()
   lazygit:toggle()
 end
 
-vim.api.nvim_set_keymap('n', '<leader>gl', '<cmd>lua _lazygit_toggle()<CR>', { noremap = true, silent = true })
-
 -- Custom keymaps
+vim.api.nvim_set_keymap('n', '<leader>gl', '<cmd>lua _lazygit_toggle()<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-s>', ':write<CR>', { desc = 'Save file' })
-vim.keymap.set('n', '<leader>e', ':Neotree float toggle=true<CR>', { desc = 'Open Neotree' })
--- vim.keymap.set('n', '<Tab>', '<cmd>bn<CR>')
--- vim.keymap.set('n', '<S-Tab>', '<cmd>bp<CR>')
+vim.keymap.set('n', '<leader>e', ':Neotree float toggle=true<CR>', { desc = 'Open Neo-tree' })
 vim.keymap.set('n', '<space>bd', '<cmd>bd<CR>')
+vim.keymap.set('n', '<S-Tab>', '<cmd>bn<CR>', { desc = 'Switch between tabs' })
