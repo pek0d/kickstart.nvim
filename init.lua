@@ -157,8 +157,25 @@ require('lazy').setup({
       options = {
         icons_enabled = true,
         theme = 'vscode',
-        component_separators = '',
+        component_separators = { left = '', right = '' },
         section_separators = '',
+        -- always_divide_middle = false,
+        sections = {
+          lualine_a = { 'mode' },
+          lualine_b = { 'branch', 'diff', 'diagnostics' },
+          lualine_c = { 'filename' },
+          lualine_x = { 'encoding', 'fileformat', 'filetype' },
+          lualine_y = { 'progress' },
+          lualine_z = { 'location' },
+        },
+        inactive_sections = {
+          lualine_a = {},
+          lualine_b = {},
+          lualine_c = { 'filename' },
+          lualine_x = { 'location' },
+          lualine_y = {},
+          lualine_z = {},
+        },
       },
     },
   },
@@ -301,7 +318,9 @@ require('lazy').setup({
         inverse = true, -- invert background for search, diffs, statuslines and errors
         contrast = 'soft', -- can be "hard", "soft" or empty string
         palette_overrides = {},
-        overrides = {},
+        overrides = {
+          CursorLineNr = { bold = true, fg = '#ff9900' },
+        },
         dim_inactive = true,
         transparent_mode = false,
       }
@@ -385,8 +404,15 @@ require('lazy').setup({
 -- Set highlight on search
 vim.o.hlsearch = false
 
+-- Set cursorline
+vim.o.cursorline = true
+vim.o.cursorlineopt = 'both'
+
 -- Make line numbers default
 vim.wo.number = true
+
+-- Enable relativenumber for lines
+vim.o.relativenumber = true
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
