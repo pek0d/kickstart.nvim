@@ -435,10 +435,10 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 
 -- Enable folding
-vim.o.foldmethod = 'indent'
-vim.o.foldnestmax = 3
-vim.o.foldminlines = 10
-vim.o.foldlevelstart = 999
+-- vim.o.foldmethod = 'indent'
+-- vim.o.foldnestmax = 3
+-- vim.o.foldminlines = 10
+-- vim.o.foldlevelstart = 999
 vim.g.markdown_folding = 1
 
 -- Enable symbols for trailing space
