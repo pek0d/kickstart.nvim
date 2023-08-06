@@ -1,4 +1,3 @@
----@diagnostic disable: missing-fields
 --[[
 
 =====================================================================
@@ -120,7 +119,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim',          opts = {} },
 
   {
     -- Adds git releated signs to the gutter, as well as utilities for managing changes
@@ -135,7 +134,8 @@ require('lazy').setup({
         changedelete = { text = '~' },
       },
       on_attach = function(bufnr)
-        vim.keymap.set('n', '<leader>gp', require('gitsigns').prev_hunk, { buffer = bufnr, desc = '[G]o to [P]revious Hunk' })
+        vim.keymap.set('n', '<leader>gp', require('gitsigns').prev_hunk,
+          { buffer = bufnr, desc = '[G]o to [P]revious Hunk' })
         vim.keymap.set('n', '<leader>gn', require('gitsigns').next_hunk, { buffer = bufnr, desc = '[G]o to [N]ext Hunk' })
         vim.keymap.set('n', '<leader>ph', require('gitsigns').preview_hunk, { buffer = bufnr, desc = '[P]review [H]unk' })
       end,
@@ -169,7 +169,7 @@ require('lazy').setup({
   },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  { 'numToStr/Comment.nvim',         opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
   { 'nvim-telescope/telescope.nvim', branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' } },
@@ -218,20 +218,20 @@ require('lazy').setup({
       require('colorizer').setup {
         filetypes = { '*' },
         user_default_options = {
-          RGB = true, -- #RGB hex codes
-          RRGGBB = true, -- #RRGGBB hex codes
-          names = true, -- "Name" codes like Blue or blue
-          RRGGBBAA = false, -- #RRGGBBAA hex codes
-          AARRGGBB = false, -- 0xAARRGGBB hex codes
-          rgb_fn = false, -- CSS rgb() and rgba() functions
-          hsl_fn = false, -- CSS hsl() and hsla() functions
-          css = false, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-          css_fn = false, -- Enable all CSS *functions*: rgb_fn, hsl_fn
+          RGB = true,          -- #RGB hex codes
+          RRGGBB = true,       -- #RRGGBB hex codes
+          names = true,        -- "Name" codes like Blue or blue
+          RRGGBBAA = false,    -- #RRGGBBAA hex codes
+          AARRGGBB = false,    -- 0xAARRGGBB hex codes
+          rgb_fn = false,      -- CSS rgb() and rgba() functions
+          hsl_fn = false,      -- CSS hsl() and hsla() functions
+          css = false,         -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+          css_fn = false,      -- Enable all CSS *functions*: rgb_fn, hsl_fn
           -- Available modes for `mode`: foreground, background,  virtualtext
           mode = 'background', -- Set the display mode.
           -- Available methods are false / true / "normal" / "lsp" / "both"
           -- True is same as normal
-          tailwind = false, -- Enable tailwind colors
+          tailwind = false,                               -- Enable tailwind colors
           -- parsers can contain values used in |user_default_options|
           sass = { enable = false, parsers = { 'css' } }, -- Enable sass colors
           virtualtext = '■',
@@ -284,7 +284,7 @@ require('lazy').setup({
   -- theme Gruvbox
   {
     'ellisonleao/gruvbox.nvim',
-    lazy = false, -- make sure we load this during startup if it is your main colorscheme
+    lazy = false,    -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       require('gruvbox').setup {
@@ -302,13 +302,14 @@ require('lazy').setup({
         invert_signs = false,
         invert_tabline = false,
         invert_intend_guides = false,
-        inverse = true, -- invert background for search, diffs, statuslines and errors
+        inverse = true,    -- invert background for search, diffs, statuslines and errors
         contrast = 'soft', -- can be "hard", "soft" or empty string
         palette_overrides = {},
         overrides = {
           CursorLineNr = { bold = true, fg = '#ff9900' },
           -- CursorLine = { reverse = true, bg = '#DAA520' },
-          Folded = { undercurl = true },
+          Folded = { undercurl = true, fg = '#5F9EA0', italic = false },
+          FoldColumn = { fg = '#4682B4', bg = '#AFEEEE' },
         },
         dim_inactive = true,
         transparent_mode = false,
@@ -318,16 +319,16 @@ require('lazy').setup({
     end,
   },
 
-  -- theme 'NeoSolarized'
+  -- theme NeoSolarized
   {
     'Tsuzat/NeoSolarized.nvim',
     lazy = true,
     config = function()
       require('NeoSolarized').setup {
-        style = 'dark', -- "dark" or "light"
-        transparent = false, -- true/false; Enable this to disable setting the background color
+        style = 'dark',         -- "dark" or "light"
+        transparent = false,    -- true/false; Enable this to disable setting the background color
         terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
-        enable_italics = true, -- Italics for different hightlight groups (eg. Statement, Condition, Comment, Include, etc.)
+        enable_italics = true,  -- Italics for different hightlight groups (eg. Statement, Condition, Comment, Include, etc.)
         styles = {
           -- Style to be applied to different syntax groups
           comments = { italic = true },
@@ -364,7 +365,7 @@ require('lazy').setup({
         group = augroup,
         root_dir = require('null-ls.utils').root_pattern('.null-ls-root', '.neoconf.json', 'Makefile', '.git'),
         sources = {
-          null_ls.builtins.formatting.stylua,
+          -- null_ls.builtins.formatting.stylua,
           null_ls.builtins.formatting.prettier,
           null_ls.builtins.formatting.autopep8,
           null_ls.builtins.formatting.yamlfix,
@@ -376,7 +377,7 @@ require('lazy').setup({
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
   -- require 'kickstart.plugins.autoformat',
-  -- require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.debug',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
@@ -446,6 +447,13 @@ vim.g.yaml_folding = 1
 -- Enable symbols for trailing space
 vim.o.list = true
 vim.o.listchars = 'eol:↲,tab:» ,trail:·,extends:<,precedes:>,conceal:┊,nbsp:␣'
+
+-- Avoid language keyboard switching
+vim.o.langmap =
+'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz'
+
+-- Showing statusline
+vim.o.laststatus = 3
 
 -- [[ Basic Keymaps ]]
 
@@ -714,7 +722,7 @@ cmp.setup {
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
 
--- [[PEKOD'S ADDITIONAL CUSTOM NEOVIM SETTINGS]]
+-- [[PEKOD'S ADDITIONAL CUSTOM SETTINGS]]
 
 -- Autoformat for lua after save file
 vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format({ async = false })]]
@@ -752,8 +760,8 @@ function _lazygit_toggle()
 end
 
 -- Custom keymaps
-vim.api.nvim_set_keymap('n', '<leader>gl', '<cmd>lua _lazygit_toggle()<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>gl', '<cmd>lua _lazygit_toggle()<CR>', { desc = 'Lazygit' })
 vim.keymap.set('n', '<C-s>', ':write<CR>', { desc = 'Save file' })
 vim.keymap.set('n', '<leader>e', ':Neotree float toggle=true<CR>', { desc = 'Open Neo-tree' })
-vim.keymap.set('n', '<space>bd', '<cmd>bd<CR>')
-vim.keymap.set('n', '<S-Tab>', '<cmd>bn<CR>', { desc = 'Switch between tabs' })
+vim.keymap.set('n', '<space>bd', '<cmd>bd<CR>', { desc = 'Close buffer' })
+vim.keymap.set('n', '<S-Tab>', '<cmd>bn<CR>', { desc = 'Switch between tabs (buffers)' })
