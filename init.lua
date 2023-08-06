@@ -307,8 +307,8 @@ require('lazy').setup({
         palette_overrides = {},
         overrides = {
           CursorLineNr = { bold = true, fg = '#ff9900' },
-          -- CursorLine = { bg = '#DAA520' },
-          Folded = { bold = true, bg = '#DAA520' },
+          -- CursorLine = { reverse = true, bg = '#DAA520' },
+          Folded = { undercurl = true },
         },
         dim_inactive = true,
         transparent_mode = false,
@@ -367,6 +367,7 @@ require('lazy').setup({
           null_ls.builtins.formatting.stylua,
           null_ls.builtins.formatting.prettier,
           null_ls.builtins.formatting.autopep8,
+          null_ls.builtins.formatting.yamlfix,
         },
       }
     end,
@@ -435,11 +436,12 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 
 -- Enable folding
-vim.o.foldmethod = 'syntax'
--- vim.o.foldnestmax = 3
--- vim.o.foldminlines = 10
--- vim.o.foldlevelstart = 999
+vim.o.foldmethod = 'indent'
+vim.o.foldnestmax = 2
+vim.o.foldminlines = 10
+vim.o.foldlevelstart = 999
 vim.g.markdown_folding = 1
+vim.g.yaml_folding = 1
 
 -- Enable symbols for trailing space
 vim.o.list = true
