@@ -307,6 +307,8 @@ require('lazy').setup({
         palette_overrides = {},
         overrides = {
           CursorLineNr = { bold = true, fg = '#ff9900' },
+          -- CursorLine = { bg = '#DAA520' },
+          Folded = { bold = true, bg = '#DAA520' },
         },
         dim_inactive = true,
         transparent_mode = false,
@@ -431,6 +433,17 @@ vim.o.completeopt = 'menuone,noselect'
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
+
+-- Enable folding
+vim.o.foldmethod = 'indent'
+vim.o.foldnestmax = 3
+vim.o.foldminlines = 10
+vim.o.foldlevelstart = 999
+vim.g.markdown_folding = 1
+
+-- Enable symbols for trailing space
+vim.o.list = true
+vim.o.listchars = 'eol:↲,tab:» ,trail:·,extends:<,precedes:>,conceal:┊,nbsp:␣'
 
 -- [[ Basic Keymaps ]]
 
@@ -703,6 +716,22 @@ cmp.setup {
 
 -- Autoformat for lua after save file
 vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format({ async = false })]]
+
+-- switch to absolute line numbers in insert mode
+vim.api.nvim_create_autocmd({ 'InsertEnter' }, {
+  callback = function()
+    vim.opt.relativenumber = false
+    vim.opt.cursorline = false
+  end,
+})
+
+-- switch to relative line numbers in normal mode
+vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
+  callback = function()
+    vim.opt.relativenumber = true
+    vim.opt.cursorline = true
+  end,
+})
 
 -- Lazygit toggle run
 local Terminal = require('toggleterm.terminal').Terminal
