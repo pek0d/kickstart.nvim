@@ -27,7 +27,20 @@ return {
     local dap = require 'dap'
     local dapui = require 'dapui'
 
-    require('mason-nvim-dap').setup({
+    dap.configurations.python = {
+      {
+        type = 'python',
+        request = 'launch',
+        name = "Launch file",
+        program = "${file}",
+        pythonPath = function()
+          return '/Library/Frameworks/Python.framework/Versions/3.11/bin/python3'
+        end,
+      },
+    }
+
+
+    require('mason-nvim-dap').setup {
       -- Makes a best effort to setup the various debuggers with
       -- reasonable debug configurations
       automatic_setup = true,
@@ -47,7 +60,7 @@ return {
           python = function(config)
             config.adapters = {
               type = "executable",
-              command = "/usr/bin/python3",
+              command = "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
               args = {
                 "-m",
                 "debugpy.adapter",
@@ -58,7 +71,6 @@ return {
         },
       }
     }
-    )
 
     -- Basic debugging keymaps, feel free to change to your liking!
     vim.keymap.set('n', '<F5>', dap.continue)
