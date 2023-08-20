@@ -352,7 +352,7 @@ require('lazy').setup({
     priority = 1000,
   },
 
-  -- null_ls autoformatter
+  -- null_ls autoformatter (archived)
   {
     'jose-elias-alvarez/null-ls.nvim',
     event = { 'BufReadPre', 'BufNewFile' },
