@@ -310,6 +310,7 @@ require('lazy').setup({
           -- CursorLine = { reverse = true, bg = '#DAA520' },
           Folded = { undercurl = true, fg = '#5F9EA0', italic = false },
           FoldColumn = { fg = '#4682B4', bg = '#AFEEEE' },
+          -- ColorColumn = { bg = '#4682B4' }
         },
         dim_inactive = true,
         transparent_mode = false,
@@ -426,6 +427,9 @@ vim.o.smartcase = true
 -- Keep signcolumn on by default
 vim.wo.signcolumn = 'yes'
 
+-- Enable colorcolumn
+vim.wo.colorcolumn = "80"
+
 -- Decrease update time
 vim.o.updatetime = 250
 vim.o.timeoutlen = 300
@@ -464,6 +468,13 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+
+-- Custom keymaps
+vim.keymap.set('n', '<leader>gl', '<cmd>lua _lazygit_toggle()<CR>', { desc = 'Lazygit' })
+vim.keymap.set('n', '<C-s>', ':write<CR>', { desc = 'Save file' })
+vim.keymap.set('n', '<leader>E', ':Neotree float toggle=true<CR>', { desc = 'Open Neo-tree' })
+vim.keymap.set('n', '<space>bd', '<cmd>bd<CR>', { desc = 'Close buffer' })
+vim.keymap.set('n', '<S-Tab>', '<cmd>bn<CR>', { desc = 'Switch between tabs (buffers)' })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -647,6 +658,19 @@ local servers = {
   },
 }
 
+-- Configure `ruff-lsp`.
+-- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ruff_lsp
+-- For the default config, along with instructions on how to customize the settings
+require('lspconfig').ruff_lsp.setup {
+  on_attach = on_attach,
+  init_options = {
+    settings = {
+      -- Any extra CLI arguments for `ruff` go here.
+      args = {},
+    }
+  }
+}
+
 -- Setup neovim lua configuration
 require('neodev').setup()
 
@@ -758,10 +782,3 @@ local lazygit = Terminal:new {
 function _lazygit_toggle()
   lazygit:toggle()
 end
-
--- Custom keymaps
-vim.keymap.set('n', '<leader>gl', '<cmd>lua _lazygit_toggle()<CR>', { desc = 'Lazygit' })
-vim.keymap.set('n', '<C-s>', ':write<CR>', { desc = 'Save file' })
-vim.keymap.set('n', '<leader>E', ':Neotree float toggle=true<CR>', { desc = 'Open Neo-tree' })
-vim.keymap.set('n', '<space>bd', '<cmd>bd<CR>', { desc = 'Close buffer' })
-vim.keymap.set('n', '<S-Tab>', '<cmd>bn<CR>', { desc = 'Switch between tabs (buffers)' })
