@@ -55,8 +55,9 @@ require('lazy').setup({
             'ruff_lsp',
             'autopep8',
             'debugpy',
-            'prettier', }
-        }
+            'prettier'
+          },
+        },
       },
       'williamboman/mason-lspconfig.nvim',
 
