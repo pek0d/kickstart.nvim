@@ -248,7 +248,7 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 
 -- Enable folding
-vim.o.foldmethod = 'indent'
+vim.o.foldmethod = 'manual'
 vim.o.foldnestmax = 2
 vim.o.foldminlines = 10
 vim.o.foldlevelstart = 999
