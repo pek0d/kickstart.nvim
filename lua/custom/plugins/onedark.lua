@@ -34,7 +34,11 @@ return
 
 			-- Custom Highlights --
 			colors = {}, -- Override default colors
-			highlights = {}, -- Override highlight groups
+			highlights = {
+				CursorLineNr = { bold = true, fg = '#ff9900' },
+				Folded = { undercurl = true, fg = '#5F9EA0', italic = false },
+				FoldColumn = { fg = '#4682B4', bg = '#AFEEEE' },
+			}, -- Override highlight groups
 
 			-- Plugins Config --
 			diagnostics = {

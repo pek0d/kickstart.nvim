@@ -158,7 +158,11 @@ require('lazy').setup({
   },
 
   -- Fuzzy Finder (files, lsp, etc)
-  { 'nvim-telescope/telescope.nvim', branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' } },
+  {
+    'nvim-telescope/telescope.nvim',
+    branch = '0.1.x',
+    dependencies = { 'nvim-lua/plenary.nvim' }
+  },
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built.
   -- Only load if `make` is available. Make sure you have the system
@@ -279,6 +283,7 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 vim.keymap.set('n', '<leader>gl', '<cmd>lua _lazygit_toggle()<CR>', { desc = 'Lazygit' })
 -- vim.keymap.set('n', '<C-s>', ':write<CR>', { desc = 'Save file' })
 vim.keymap.set('n', '<leader>E', ':Neotree float toggle=true<CR>', { desc = 'Open Neo-tree' })
+vim.keymap.set('n', '<leader>T', ':Telescope<CR>', { desc = 'Open Telescope' })
 vim.keymap.set('n', '<space>bd', '<cmd>bd<CR>', { desc = 'Close buffer' })
 vim.keymap.set('n', '<S-Tab>', '<cmd>bn<CR>', { desc = 'Switch between tabs (buffers)' })
 
@@ -528,15 +533,6 @@ cmp.setup {
         cmp.select_next_item()
       elseif luasnip.expand_or_locally_jumpable() then
         luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.locally_jumpable(-1) then
-        luasnip.jump(-1)
       else
         fallback()
       end
