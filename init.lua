@@ -257,6 +257,10 @@ vim.o.foldlevelstart = 999
 vim.g.markdown_folding = 1
 vim.g.yaml_folding = 1
 
+-- Splitting
+vim.o.splitbelow = true
+vim.o.splitright = true
+
 -- Enable symbols for trailing space
 vim.o.list = true
 vim.o.listchars = 'eol:↲,tab:» ,trail:·,extends:<,precedes:>,conceal:┊,nbsp:␣'
