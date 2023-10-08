@@ -237,7 +237,7 @@ vim.o.smartcase = true
 -- Keep signcolumn on by default
 vim.o.signcolumn = 'yes'
 
--- Enable colorcolumn
+-- Enable colorcolumn (vertical line)
 vim.o.colorcolumn = "80"
 
 -- Decrease update time
@@ -251,11 +251,8 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 
 -- Enable folding
-vim.o.foldmethod = 'manual'
-vim.o.foldnestmax = 2
-vim.o.foldlevelstart = 999
-vim.g.markdown_folding = 1
-vim.g.yaml_folding = 1
+vim.o.foldmethod = 'expr'
+vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
 
 -- Splitting
 vim.o.splitbelow = true
@@ -339,7 +336,7 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim' },
+  ensure_installed = { 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim', 'json', 'xml' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -586,3 +583,10 @@ local lazygit = Terminal:new {
 function _lazygit_toggle()
   lazygit:toggle()
 end
+
+-- Autoopen folders on open file
+vim.api.nvim_create_autocmd({ 'BufReadPost', 'FileReadPost' }, {
+  callback = function()
+    vim.cmd('normal zR')
+  end,
+})
