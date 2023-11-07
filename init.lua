@@ -54,8 +54,6 @@ require('lazy').setup({
             'black',
             'ruff_lsp',
             'autopep8',
-            'debugpy',
-            'prettier'
           },
         },
       },
@@ -281,7 +279,6 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 
 -- Custom keymaps
 vim.keymap.set('n', '<leader>gl', '<cmd>lua _lazygit_toggle()<CR>', { desc = 'Lazygit' })
--- vim.keymap.set('n', '<C-s>', ':write<CR>', { desc = 'Save file' })
 vim.keymap.set('n', '<leader>E', ':Neotree float toggle=true<CR>', { desc = 'Open Neo-tree' })
 vim.keymap.set('n', '<leader>T', ':Telescope<CR>', { desc = 'Open Telescope' })
 vim.keymap.set('n', '<space>bd', '<cmd>bd<CR>', { desc = 'Close buffer' })

@@ -1,7 +1,7 @@
 return
--- null_ls autoformatter (archived)
+-- inject LSP diagnostics, code actions, and more via Lua
 {
-	'jose-elias-alvarez/null-ls.nvim',
+	'nvimtools/none-ls.nvim',
 	event = { 'BufReadPre', 'BufNewFile' },
 	dependencies = { 'mason.nvim' },
 	config = function()
