@@ -138,9 +138,8 @@ require('lazy').setup({
     'lukas-reineke/indent-blankline.nvim',
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help indent_blankline.txt`
-    main = "ibl",
-    opts = {
-    },
+    main = 'ibl',
+    opts = {},
   },
 
   -- "gc" to comment visual regions/lines
@@ -158,7 +157,7 @@ require('lazy').setup({
   {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
-    dependencies = { 'nvim-lua/plenary.nvim' }
+    dependencies = { 'nvim-lua/plenary.nvim' },
   },
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built.
@@ -236,7 +235,7 @@ vim.o.smartcase = true
 vim.o.signcolumn = 'yes'
 
 -- Enable colorcolumn (vertical line)
-vim.o.colorcolumn = "80"
+vim.o.colorcolumn = '80'
 
 -- Decrease update time
 vim.o.updatetime = 250
@@ -453,7 +452,7 @@ end
 local servers = {
   -- clangd = {},
   -- gopls = {},
-  -- pyright = {},
+  pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
 
@@ -474,8 +473,8 @@ require('lspconfig').ruff_lsp.setup {
     settings = {
       -- Any extra CLI arguments for `ruff` go here.
       args = {},
-    }
-  }
+    },
+  },
 }
 
 -- Setup neovim lua configuration
@@ -584,6 +583,6 @@ end
 -- Autoopen folders on open file
 vim.api.nvim_create_autocmd({ 'BufReadPost', 'FileReadPost' }, {
   callback = function()
-    vim.cmd('normal zR')
+    vim.cmd 'normal zR'
   end,
 })
