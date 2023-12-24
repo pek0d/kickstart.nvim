@@ -1,5 +1,5 @@
-return
 -- theme Gruvbox
+return
 {
 	'ellisonleao/gruvbox.nvim',
 	lazy = false, -- make sure we load this during startup if it is your main colorscheme
@@ -31,7 +31,7 @@ return
 				-- ColorColumn = { bg = '#4682B4' }
 			},
 			dim_inactive = true,
-			transparent_mode = false,
+			transparent_mode = true,
 		}
 		-- Activate the colorscheme here
 		-- vim.cmd.colorscheme 'gruvbox'

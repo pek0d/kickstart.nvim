@@ -1,6 +1,5 @@
-return
 -- theme inspired by Atom
-{
+return {
 	'navarasu/onedark.nvim',
 	priority = 1000,
 	config = function()
@@ -24,7 +23,7 @@ return
 				keywords = 'none',
 				functions = 'none',
 				strings = 'italic',
-				variables = 'none'
+				variables = 'none',
 			},
 
 			-- Lualine options --
@@ -48,6 +47,6 @@ return
 			},
 		}
 		-- Activate the colorscheme here
-		vim.cmd.colorscheme 'onedark'
+		-- vim.cmd.colorscheme 'onedark'
 	end,
 }

@@ -1,4 +1,3 @@
----@diagnostic disable: missing-fields
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
@@ -248,8 +247,8 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 
 -- Enable folding
-vim.o.foldmethod = 'expr'
-vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.o.foldmethod = 'syntax'
+vim.o.foldlevel = 99
 
 -- Splitting
 vim.o.splitbelow = true
@@ -575,14 +574,7 @@ local lazygit = Terminal:new {
     border = 'double',
   },
 }
----@diagnostic disable-next-line: lowercase-global
+
 function _lazygit_toggle()
   lazygit:toggle()
 end
-
--- Autoopen folders on open file
-vim.api.nvim_create_autocmd({ 'BufReadPost', 'FileReadPost' }, {
-  callback = function()
-    vim.cmd 'normal zR'
-  end,
-})
