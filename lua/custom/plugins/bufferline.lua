@@ -1,19 +1,17 @@
----@diagnostic disable: missing-fields
-return
 -- bufferline
-{
+return {
 	'akinsho/bufferline.nvim',
-	version = "*",
+	version = '*',
 	dependencies = 'nvim-tree/nvim-web-devicons',
-	config = function(_, opts)
-		require("bufferline").setup {
+	config = function()
+		require('bufferline').setup {
 			options = {
 				hover = {
 					enabled = true,
 					delay = 150,
-					reveal = { 'close' }
-				}
-			}
+					reveal = { 'close' },
+				},
+			},
 		}
-	end
+	end,
 }

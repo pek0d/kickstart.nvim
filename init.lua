@@ -62,19 +62,12 @@ require('lazy').setup({
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       {
         'j-hui/fidget.nvim',
-        tag = 'legacy',
-        opts = {
-          text = {
-            spinner = 'dots_pulse', -- animation shown when tasks are ongoing
-            done = '✔', -- character shown when all tasks are complete
-            commenced = 'Started', -- message shown when task starts
-            completed = 'Completed', -- message shown when task completes
-          },
-        },
+        tag = 'v1.1.0',
+        opts = {},
       },
 
       -- Additional lua configuration, makes nvim stuff amazing!
-      'folke/neodev.nvim',
+      { 'folke/neodev.nvim' },
     },
   },
 
