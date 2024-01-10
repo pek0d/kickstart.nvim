@@ -20,7 +20,7 @@ return {
 			-- You can configure multiple style with comma separated, For e.g., keywords = 'italic,bold'
 			code_style = {
 				comments = 'italic',
-				keywords = 'none',
+				keywords = 'bold',
 				functions = 'none',
 				strings = 'italic',
 				variables = 'none',
@@ -47,6 +47,6 @@ return {
 			},
 		}
 		-- Activate the colorscheme here
-		-- vim.cmd.colorscheme 'onedark'
+		vim.cmd.colorscheme 'onedark'
 	end,
 }
