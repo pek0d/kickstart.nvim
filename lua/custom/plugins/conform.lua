@@ -4,7 +4,6 @@ return {
   event = { 'BufReadPre', 'BufNewFile' },
   config = function()
     local conform = require 'conform'
-
     conform.setup {
       formatters_by_ft = {
         javascript = { 'prettier' },
@@ -19,8 +18,16 @@ return {
         markdown = { 'prettier' },
         graphql = { 'prettier' },
         lua = { 'stylua' },
-        python = { 'isort', 'ruff_format', 'black' },
+        python = function(bufnr)
+          if require('conform').get_formatter_info('ruff_format', bufnr).available then
+            return { 'ruff_format' }
+          else
+            return { 'isort', 'black', 'mypy' }
+          end
+        end,
       },
+      -- Use the "*" filetype to run formatters on all filetypes.
+      ['*'] = { 'codespell' },
       format_on_save = {
         lsp_fallback = true,
         async = false,
